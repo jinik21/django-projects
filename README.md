@@ -1,12 +1,12 @@
-# jinik21 \
+# jinik21 
 3 WEBPAGES-\
 A)index.html -SEARCH TEXT AND LUCKY \
 B)google_image_search.html- IMAGE SEARCH \
 C)google_advanced_search.html - ADVANCED SEARCH \
 
-# VIDEO DEMONSTRATION LINK \
+# VIDEO DEMONSTRATION LINK 
 
-https://youtu.be/nqoZg5WfmTk \
+https://youtu.be/nqoZg5WfmTk 
 
 TIMESTAMPS:- \
 Aesthetics -  0:09 \
