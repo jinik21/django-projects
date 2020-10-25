@@ -150,16 +150,3 @@ def edit(request,name):
             util.save_entry(title,content)
             return redirect(f'/wiki/{title}')
 
-
-def Error(request):
-   entries=util.list_entries()
-   if request.method=='POST':
-       form = Search(request.POST)
-       if form.is_valid():
-           title=form.cleaned_data["q"]
-           if title in entries:
-               return redirect(f'/wiki/{title}')
-           else:
-               return render(request,"encyclopedia/error.html",{'name':title})
-   else:
-        return render(request,"encyclopedia/error.html",{'name':name})
