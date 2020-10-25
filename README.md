@@ -1,14 +1,14 @@
 # jinik21 
 
-##Project1-Wiki
+## Project1-Wiki
 
 
 
-##Youtube video link
+## Youtube video link
 
 https://youtu.be/Qm4eqrH33Ts
 
-###Timestamps
+### Timestamps
 
 Entry Page- 00:07
 Index Page- 00:32
