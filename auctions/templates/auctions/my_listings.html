@@ -1,0 +1,45 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Listings</h2>
+    {% for listing in Listings %}
+    {% if listing.Active %}
+        <div class="container border p-2 m-2">
+            <div class="row">
+                <div class="col">
+                    <img src="{{ listing.Image_Link }}" alt="image" style="width: 300px; height: auto">
+                </div>
+                <div class="col text-left">
+                    <h2 class="display-4">{{ listing.Title }}</h2>
+                    <h4>Price: ${{ listing.Starting_Bid }}</h4>
+                    <p><small>{{ listing.Time_Added }}</small></p>
+                    <h4>Status: Active </h4>
+                    <a href="{% url 'ViewLisitng' listing.id%}" type="submit" class="btn btn-primary">Go To Listing</a>
+                    <a href="{% url 'AddtoWatchlist' listing.id %}" type="submit" class="btn btn-primary">Watchlist</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="container border p-2 m-2">
+            <div class="row">
+                <div class="col">
+                    <img src="{{ listing.Image_Link }}" alt="image" style="width: 300px; height: auto">
+                </div>
+                <div class="col text-left">
+                    <h2 class="display-4">{{ listing.Title }}</h2>
+                    {% if listing.Price != 0 %}
+                    <h4>Price: ${{ listing.Price }}</h4>
+                    {% else %}
+                    <h4>Price: ${{ listing.Starting_Bid}}</h4>
+                    {% endif %}
+                    <p><small>{{ listing.Time_Added }}</small></p>
+                    <h4>Status: Closed </h4>
+                    <a href="{% url 'ViewLisitng' listing.id%}" type="submit" class="btn btn-primary">Go To Listing</a>
+                    <a href="{% url 'AddtoWatchlist' listing.id %}" type="submit" class="btn btn-primary">Watchlist</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

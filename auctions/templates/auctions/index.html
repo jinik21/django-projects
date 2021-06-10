@@ -1,0 +1,28 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {% for listing in Listings %}
+    {% if listing.Active %}
+        <div class="container border p-2 m-2">
+            <div class="row">
+                <div class="col">
+                    <img src="{{ listing.Image_Link }}" alt="image" style="width: 300px; height: auto">
+                </div>
+                <div class="col text-left">
+                    <h2 class="display-4">{{ listing.Title }}</h2>
+                    {% if listing.Price != 0 %}
+                    <h4>Price: ${{ listing.Price }}</h4>
+                    {% else %}
+                    <h4>Price: ${{ listing.Starting_Bid}}</h4>
+                    {% endif %}
+                    <h6>{{ listing.Description}}</h6>
+                    <p><small>{{ listing.Time_Added }}</small></p>
+                    <a href="{% url 'ViewLisitng' listing.id%}" type="submit" class="btn btn-primary">View Listing</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

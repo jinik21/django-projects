@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Categories</h2>
+    {% for category in Categories %}
+        <div class="container border p-2 m-2">
+            <div class="row">
+                <div class="col text-left">
+                   <a href="{% url 'ViewCategory' category.id %}" type="submit" > <h2 class="display-4">{{ category.Name }}</h2></a>
+                </div>
+            </div>
+        </div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    {% if message %}
+        <div class="alert alert-{{msg_type}}">{{ message }}</div>
+    {% endif %}
+
+    <div class="jumbotron text-center" style="padding: 3% 10%;">
+
+        <br>
+        <br>
+        <h1><strong>{{product.Title}}</strong></h1> <br>
+        <br>
+        <img src="{{product.Image_Link}}" alt="indeximage" style="height:10%;width: 100%;" class="embed-responsive"> <br> <br> <br> 
+        <p class="lead" align="justify"><strong>Description : </strong> {{product.Description}}</p>  
+        <p class="lead" align="justify"><strong>Category : </strong>{{product.Category}}</p>
+        {% if product.Price == 0 %}
+        <p class="lead" align="justify"><strong>Starting Bid Price : </strong>{{product.Starting_Bid}}$</p>
+        <p class="lead" align="justify"><strong>Current Bid Price : </strong>Be The First Bidder!!!</p>
+        {% else %}
+        <p class="lead" align="justify"><strong>Current Bid Price : </strong>{{product.Price}}$</p>
+        {% endif %}
+        <p class="lead" align="justify"><strong>Seller : </strong>{{product.User}}</p>
+        <p class="lead" align="justify"><strong>Created on : </strong>{{product.Time_Added}}</p>
+        <br>
+
+        {% if added %}
+            <!-- <input type="button" class="btn btn-danger btn-lg" name="remove" placeholder="Remove from Watchlist"> -->
+            <a href="{% url 'AddtoWatchlist' product.id%}" type="submit" class="btn btn-danger btn-lg" name="remove">Remove from Watchlist</a>
+        {% else %}
+            <!-- <input type="button" class="btn btn-success btn-lg" name="addto" placeholder="Add to Watchlist"> -->
+            <a href="{% url 'AddtoWatchlist' product.id %}" class="btn btn-success btn-lg" name="addto">Watchlist</a>
+        {% endif %}
+        <br> <br>
+
+        {% if product.Active %}
+        {% if user != product.User %}
+            <p class="lead" align="justify"><strong>Place your Bid : </strong></p>
+            <form action="{% url 'ViewLisitng' product.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="text" name="Newbid" placeholder="Add Bid" required>
+                </div>
+                <p align="justify"><input class="btn btn-primary" type="submit" value="Submit"></p>
+            </form>
+        {% endif %}
+        {% else %}
+        <p class="lead" align="justify">Winner is : <strong>{{ winner }}</strong></p>
+        {% endif %}
+        
+
+        <br> <br> <br>
+
+        <!-- Displaying comments-->
+        <div class="jumbotron text-center">
+
+            <!-- Title -->
+            <h2 class="card-title h2">COMMENTS</h2>
+            <!-- Subtitle -->
+            <p class="lead my-4">These are the comments left by other users.</p>
+        
+            {% if comments %}
+
+                {% for comment in comments %}
+                    <br>
+                    <!-- Grid row -->
+                    <div class="card text-left">
+                    <h5 class="card-header h5">{{comment.Title}}</h5>
+                    <div class="card-body">
+                        <!-- <h5 class="card-title">Rating :</h5> -->
+                        <p class="lead">{{comment.Comment}}</p>
+                        <p class="card-text">{{comment.Time}}</p>
+                    </div>
+                    </div>
+                    <h5 class="card-header h5">-{{comment.User}}</h5>
+                {% endfor %}
+
+            {% else %}
+                <div class="text-center">
+                    <!-- Text -->
+                    <br> <br> 
+                    <p class="lead">No Comments Found</p> 
+                </div>
+            {% endif %}
+        </div>
+        <!-- End displaying comments -->
+        
+        {% if user != product.User %}
+            <!-- Displaying comments-->
+            <div class="jumbotron text-center">
+
+                <!-- Title -->
+                <h2 class="card-title h2">ADD COMMENT</h2>
+                
+                <form action="{% url 'AddComment' product.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="comment_title" placeholder="Add Title" required></input>
+                        <textarea class="form-control" name="comment" rows="4" placeholder="Your Comment" required></textarea>
+                    </div>
+                    <p align="justify"><input class="btn btn-primary" type="submit" value="Submit"></p>
+                </form>
+            </div>
+            <!-- End add comments -->
+        {% endif %}
+
+        
+
+        {% if user == product.User %}
+        {% if product.Active %}
+            <a href="{% url 'CloseBid' product.id %}" class="btn btn-info btn-lg"> Close Bid </a>
+        {% endif %}
+        {% endif %}
+
+    </div>
+{% endblock %}
