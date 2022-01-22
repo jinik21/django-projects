@@ -10,3 +10,7 @@ https://youtu.be/P-CW-iUPA7k
 1:37 View Email \
 1:40 Archive and Unarchive Mail and Archive Mail Box \
 1:50 Reply Mail 
+
+
+# Note
+Checkout all ranches for different project
