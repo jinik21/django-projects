@@ -13,4 +13,4 @@ https://youtu.be/P-CW-iUPA7k
 
 
 # Note
-Checkout all ranches for different project
+Checkout all branches for different project
